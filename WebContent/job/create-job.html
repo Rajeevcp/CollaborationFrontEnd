@@ -1,0 +1,38 @@
+<div ng-controller="jobController as ctrl">
+<div class="container">
+
+<div ng-if="suMessage" class="alert alert-success" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Success!</strong> Job Created successfully!
+</div>
+</div>
+<h2 class="text-center">Create Job</h2>
+<form class="form-horizontal" name="create_job" ng-submit="job_create()">
+ <div class="form-group">
+<label class="control-label col-sm-2">ID:</label><div class="col-sm-10"><input type="text" name="id" id="id"  ng-model="job.id">
+</div></div>
+ <div class="form-group">
+<label class="control-label col-sm-2">Title</label><div class="col-sm-10"><input type="text" id="user_id" ng-model="job.title">
+</div></div>
+ <div class="form-group">
+<label class="control-label col-sm-2">Qualification:</label><div class="col-sm-10"><input type="text" id="title" ng-model="job.qualification">
+</div></div>
+ <div class="form-group">
+<label class="control-label col-sm-2">Date:</label><div class="col-sm-10"><input type="date" id="date" ng-model="job.date_time">
+</div></div>
+ <div class="form-group">
+<label class="control-label col-sm-2">Status:</label><div class="col-sm-10"><select id="status" ng-model="job.status"><option value="C">Vacant</option>
+<option value="C">Closed</option>
+</select>
+</div></div>
+ <div class="form-group">
+<label class="control-label col-sm-2">Description:</label><div class="col-sm-10"><textarea cols="60" rows="10" id="description" ng-model="job.description"></textarea>
+</div></div>
+ <div class="form-group">
+ <div class="col-sm-offset-2 col-sm-10">
+<input type="submit" value="Create">
+</div>
+</div>
+</form>
+</div>
+</div>

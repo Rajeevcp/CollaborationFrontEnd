@@ -1,0 +1,42 @@
+<div ng-controller="blogController as ctrl">
+<div ng-hide="job.id" ng-init="getUserAppJob(currentUser.id); getAllJob() ">
+
+
+
+
+
+<div class="container">
+<h2 class="text-center">Apply Jobs Now !!!</h2>
+<table class="table table-hover table-condensed table-bordered">
+<thead>
+<tr>
+<th>ID</th>
+<th>TITLE</th>
+<th>QUALIFICATION</th>
+<th class="col-lg-1">PUBLISHED ON</th>
+<th>STATUS</th>
+<th>DESCRIPTION</th>
+<th class="col-lg-2">OPERATIONS</th>
+</tr>
+</thead>
+	
+   <tr ng-repeat="jobDetails in jobs">
+   <div>
+   <td>{{jobDetails.id}}</td>
+   <td>{{jobDetails.title}}</td>
+   <td>{{jobDetails.qualification}}</td>
+   <td >{{jobDetails.date_time| date:'longDate'}}</td>
+   <td ng-if="jobDetails.status=='C'">Closed</td>
+   <td ng-if="jobDetails.status=='V'">Vacant</td>
+   <td ng-if="jobDetails.status !='C' && jobDetails.status !='V'">Not Updated</td>
+   <td>{{jobDetails.description}}</td>
+   <td ng-hide="show(jobDetails.id)" style='white-space: nowrap'><a href="#job" ng-click="jobApply(jobDetails.id)">Apply Now</a>
+   <td ng-show="show(jobDetails.id)">Applied</td>
+   </div>
+   </tr>
+		
+
+</table>
+</div>
+</div>
+</div>

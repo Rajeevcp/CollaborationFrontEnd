@@ -1,0 +1,21 @@
+<div ng-controller="blogController as ctrl">
+<div ng-init="getAllBlog()">
+
+<div class="container">
+  <h2 class="text-center">Blog</h2>
+  <div ng-repeat="blogDetails in blogs">
+  <div ng-hide="blogDetails.status =='N'">
+  <div class="panel panel-default">
+    <div class="panel-heading"><h3>{{blogDetails.title}}</h3></div>
+    
+    <div ng-maxlength="5" class="panel-body">{{blogDetails.description| limitTo: 400}}
+    <div style="float:right;"><a href="#blog/{{blogDetails.id}}" ng-click="single_blog(blogDetails.id)">Read More</a></div></div>
+    
+    <div class="panel-footer">Author: {{blogDetails.user_id}}  Published On: {{blogDetails.date_time| date:'longDate'}}</div>
+  </div>
+  </div>
+  </div>
+</div>
+</div>
+</div>
+

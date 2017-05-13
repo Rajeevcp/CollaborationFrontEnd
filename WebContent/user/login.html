@@ -1,0 +1,56 @@
+
+<div ng-controller="UserController as ctrl">
+
+	<div ng-show='user.errorMessage'>
+		<div class="alert alert-danger fade in">
+			{{user.errorMessage}}</div>
+
+	</div>
+{{currentUser.errorCode}}
+	<span ng-hide="currentUser.id">
+		<form name="form" ng-submit="ctrl.login()" role="form">
+<div class="container">
+<div class="row">
+<div class="col-md-4 col-md-offset-4">
+		<div class="form-group"
+				ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+				<label for="username">Username</label> 
+				
+				
+				<input type="text"
+					name="username" id="username" class="form-control input-lg"
+					ng-model="ctrl.user.id" required /> 
+					
+					
+					<span
+					ng-show="form.username.$dirty && form.username.$error.required"
+					class="help-block">Username is required</span>
+					</div>
+					</div>
+			</div>
+			<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+			<div class="form-group"
+				ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+				<label for="password">Password</label> <input type="password"
+					name="password" id="password" class="form-control input-lg"
+					ng-model="ctrl.user.password" required /> <span
+					ng-show="form.password.$dirty && form.password.$error.required"
+					class="help-block">Password is required</span>
+			</div>
+			</div>
+			</div>
+			<div class"row">
+			<div class="col-md-4 col-md-offset-4">
+			<div class="form-actions">
+				<button type="submit"
+					ng-disabled="form.$invalid"
+					class="btn btn-primary">Login</button>
+				<a href="#/register" class="btn btn-link">Register</a>
+				</div>
+			</div>
+			</div>
+			</div>
+		</form>
+	</span>
+</div>

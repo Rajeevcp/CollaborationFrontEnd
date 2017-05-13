@@ -1,0 +1,16 @@
+<div ng-controller="blogController as ctrl">
+<div class="container">
+<div class="page-header">
+<h2 class="text-center" style="text-transform: uppercase;">{{currentBlog.title}}</h2>
+</div>
+<div><strong>Published On: {{currentBlog.date_time| date:'longDate'}}</strong></div>
+<div class="row">
+<div class=col-md-8 col-md-offset-2">
+{{currentBlog.description}}
+</div>
+</div>
+<div>
+<strong>Author: {{currentBlog.user_id}}</strong>
+</div>
+</div>
+</div>

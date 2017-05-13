@@ -1,0 +1,37 @@
+
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Collaboration</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">Home</a></li>
+       <li><a href="#profile">My Profile</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="">Blog<span class="caret"></span></a>
+      <ul class="dropdown-menu">
+          <li><a href="#blog">List Blog</a></li>
+          <li><a href="#blog-create">Create Blog</a></li>
+          <li><a href="#blog-manage">Manage Blog</a></li>
+          <li><a href="#myBlog">My Blog</a></li>
+        </ul>
+      
+      </li>
+      <li><a href="#users">Users</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="">Job<span class="caret"></span></a>
+       <ul class="dropdown-menu">
+          <li><a href="#job">List Job</a></li>
+          
+          <li><a href="#create_job">Create Job</a></li>
+           <li><a href="#job-manage">Manage Job</a></li>
+           
+        </ul>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+    <li ng-show="currentUser.id"><a href="#profile"><span></span> Welcome {{currentUser.name}} !!!</a></li>
+      <li ng-hide="currentUser.id"><a href="#register"><span></span> Sign Up</a></li>
+      <li ng-hide="currentUser.id"><a href="#login"><span></span> Login</a></li>
+      <li ng-show="currentUser.id"><a ng-click="logout()" href="#logout"><span></span> Logout</a></li>
+    </ul>
+  </div>
+
+

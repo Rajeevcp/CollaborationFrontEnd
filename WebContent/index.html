@@ -1,0 +1,84 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);
+</script>
+<style>
+ .myCol {
+  font-family: color: #000000; font: 16px "Source Sans Pro", sans-serif; font-weight: 400; 
+} 
+.navbar-inverse {
+    background-color: #11718e !important;
+    border-color: #ffffff !important;
+}
+.navbar-inverse .navbar-brand {
+    color: #ffffff !important;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #ffffff !important;
+}
+.navbar-brand {
+    
+    font-size: 40px !important;
+ }
+ .navbar-nav {
+ font-size: 18px !important;
+ }
+ .modal {
+    position: inherit !important; 
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="css/bootstrap.min.css" >
+
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+
+
+</head>
+<body class="myCol">
+
+<div class="navbar navbar-inverse navbar-static-top">
+<div ng-include="'c_common/header.html'"></div>
+	</div>
+
+
+
+		<div ng-view></div>
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript" src="js/angular-resource.js"></script>
+<script type="text/javascript" src="js/angular-route.js"></script>
+<script type="text/javascript" src="js/angular-cookies.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<script src="js/app.js"></script>
+<script src="user/UserController.js"></script>
+<script src="user/UserService.js"></script>
+<script src="blog/blogController.js"></script>
+<script src="blog/blogService.js"></script>
+<script src="job/jobController.js"></script>
+<script src="job/jobService.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
