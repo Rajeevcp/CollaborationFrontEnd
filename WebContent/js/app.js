@@ -17,8 +17,8 @@ app.config(function($routeProvider) {
 		controller : 'blogController',
 		templateUrl : 'blog/blog.html'
 	}).when('/users', {
-		controller : 'UserController',
-		templateUrl : 'user/users.html'
+		controller : 'friendController',
+		templateUrl : 'friend/people.html'
 	})
 
 	.when('/blog-create', {
@@ -35,13 +35,16 @@ app.config(function($routeProvider) {
 	.when('/blog/:param2', {
 		templateUrl : 'blog/singleBlog.html',
 		controller : 'blogController'
-	}).when('/create_job', {
+	})
+	.when('/create_job', {
 		templateUrl : 'job/create-job.html',
 		controller : 'jobController'
-	}).when('/job-manage', {
+	})
+	.when('/job-manage', {
 		templateUrl : 'job/manageJob.html',
 		controller : 'jobController'
-	}).when('/job', {
+	})
+	.when('/job', {
 		templateUrl : 'job/listJob.html',
 		controller : 'jobController'
 	})
@@ -52,6 +55,11 @@ app.config(function($routeProvider) {
 	.when('/myBlog', {
 		templateUrl : 'blog/my_blog.html',
 		controller : 'blogController'
+	})
+	
+	.when('/friend/:param1', {
+		templateUrl : 'friend/send_request.html',
+		controller : 'UserController'
 	})
 
 })

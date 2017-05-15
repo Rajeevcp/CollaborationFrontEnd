@@ -1,0 +1,106 @@
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<div class="container"
+	ng-init="fetchAllUsers(); getMyfriendsreq();showFriend()">
+	<div class="top">
+	
+		
+			<h2 class="text-center">Friend's List</h2>
+		
+	</div>
+	<div class="row">
+
+		<div class="shadow">
+			<div class="col-sm-12" ng-repeat="userDetails in users"
+				ng-if="userDetails.id != currentUser.id && showFriends(userDetails.id) == 'aa' ">
+				<div class="col-sm-2">
+					<img src="https://www.infrascan.net/demo/assets/img/avatar5.png"
+						class="img-circle" width="60px">
+				</div>
+				<div class="col-sm-8">
+					<h4>
+						<a>{{userDetails.name}}</a>
+					</h4>
+
+				</div>
+				<div class="col-sm-2">
+
+					<a ng-click="sendRequest(userDetails.id)" href="#users">Friend
+						&nbsp;&nbsp;<span style="color: green"
+						class="glyphicon glyphicon-ok"></span>
+					</a>
+
+
+				</div>
+				<div class="clearfix"></div>
+				<hr />
+			</div>
+
+
+
+		</div>
+	</div>
+	<h2 class="text-center">Confirm Request</h2>
+	<div class="row">
+
+		<div class="shadow">
+			<div class="col-sm-12" ng-repeat="userDetails in users"
+				ng-if="userDetails.id != currentUser.id && show(userDetails.id) == 'cc' ">
+				<div class="col-sm-2">
+					<img src="https://www.infrascan.net/demo/assets/img/avatar5.png"
+						class="img-circle" width="60px">
+				</div>
+				<div class="col-sm-8">
+					<h4>
+						<a>{{userDetails.name}}</a>
+					</h4>
+
+				</div>
+				<div class="col-sm-2">
+
+					<a ng-click="sendRequest(userDetails.id)" href="#users">CONFIRM</a> |
+                    <a ng-click="sendRequest(userDetails.id)" href="#users">REJECCT</a>
+				</div>
+				<div class="clearfix"></div>
+				<hr />
+			</div>
+
+
+
+		</div>
+	</div>
+	<h2 class="text-center">People You May Know</h2>
+
+	<div class="row">
+
+		<div class="shadow">
+			<div class="col-sm-12" ng-repeat="userDetails in users"
+				ng-if="userDetails.id != currentUser.id && show(userDetails.id) == 'xx' && showFriends(userDetails.id) == 'bb'">
+				<div class="col-sm-2">
+					<img src="https://www.infrascan.net/demo/assets/img/avatar5.png"
+						class="img-circle" width="60px">
+				</div>
+				<div class="col-sm-8">
+					<h4>
+						<a>{{userDetails.name}}</a>
+					</h4>
+
+				</div>
+				<div class="col-sm-2">
+
+					<a ng-click="sendRequest(userDetails.id)" href="#users">SEND
+						Request &nbsp;&nbsp;<span class="glyphicon glyphicon-send"></span>
+					</a>
+
+				</div>
+				<div class="clearfix"></div>
+				<hr />
+			</div>
+
+
+
+		</div>
+	</div>
+</div>
