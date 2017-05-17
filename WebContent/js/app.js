@@ -61,6 +61,11 @@ app.config(function($routeProvider) {
 		templateUrl : 'friend/send_request.html',
 		controller : 'UserController'
 	})
+	.when('/chat',
+	{
+		controller:'ChatCtrl',
+		templateUrl:'_chat/chat.html'
+	})
 
 })
 

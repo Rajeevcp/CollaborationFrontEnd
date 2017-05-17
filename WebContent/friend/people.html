@@ -1,4 +1,41 @@
 <head>
+<style>
+
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+
+#load{
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index:9999;
+    background:url("https://www.creditmutuel.fr/cmne/fr/banques/webservices/nswr/images/loading.gif") no-repeat center center 
+}
+</style>
+<script>
+document.onreadystatechange = function () {
+	  var state = document.readyState
+	  if (state == 'complete') {
+	      setTimeout(function(){
+	          document.getElementById('interactive');
+	        // document.getElementById('load').style.visibility="hidden";
+	         document.getElementById("load").style.visibility = "hidden";
+	      },1000);
+	  }
+	}
+</script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
@@ -6,7 +43,7 @@
 	ng-init="fetchAllUsers(); getMyfriendsreq();showFriend()">
 	<div class="top">
 	
-		
+		{{currentUser.name}}
 			<h2 class="text-center">Friend's List</h2>
 		
 	</div>
@@ -31,8 +68,8 @@
 						&nbsp;&nbsp;<span style="color: green"
 						class="glyphicon glyphicon-ok"></span>
 					</a>
-
-
+<div ng-show="showthis"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</div>
+	<a ng-click="unfriend(userDetails.id); showthis=true" href="#users" >Unfriend <span class="glyphicon glyphicon-trash"></span></a>
 				</div>
 				<div class="clearfix"></div>
 				<hr />
@@ -42,11 +79,11 @@
 
 		</div>
 	</div>
-	<h2 class="text-center">Confirm Request</h2>
+	<h2 ng-show="requestedFriends != 0" class="text-center">Confirm Request</h2>
 	<div class="row">
 
 		<div class="shadow">
-			<div class="col-sm-12" ng-repeat="userDetails in users"
+			<div class="col-sm-12" ng-repeat="userDetails in users" 
 				ng-if="userDetails.id != currentUser.id && show(userDetails.id) == 'cc' ">
 				<div class="col-sm-2">
 					<img src="https://www.infrascan.net/demo/assets/img/avatar5.png"
@@ -59,9 +96,10 @@
 
 				</div>
 				<div class="col-sm-2">
-
-					<a ng-click="sendRequest(userDetails.id)" href="#users">CONFIRM</a> |
-                    <a ng-click="sendRequest(userDetails.id)" href="#users">REJECCT</a>
+				
+                     <div ng-init="showme=false" ng-show="showme"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</div>
+					<a  ng-click="acceptRequest(userDetails.id);showme=true" href="#users">CONFIRM</a> 
+                    <a  ng-click="sendRequest(userDetails.id)" href="#users"> | REJECCT</a>
 				</div>
 				<div class="clearfix"></div>
 				<hr />
@@ -71,6 +109,7 @@
 
 		</div>
 	</div>
+	
 	<h2 class="text-center">People You May Know</h2>
 
 	<div class="row">

@@ -45,11 +45,12 @@ app.controller('friendController', [
 				errorMessage : '',
 				errorCode : ''
 			};
-			$rootScope.myfriends = [];
+			$scope.myfriends = [];
 			$scope.users = [];
 
-			$rootScope.requestedFriends = [];
-			self.fetchAllUsers = function() {
+			$scope.requestedFriends = [];
+
+			$scope.fetchAllUsers = function() {
 				UserService.fetchAllUsers().then(function(d) {
 					$scope.users = d;
 				}, function(errResponse) {
@@ -57,7 +58,7 @@ app.controller('friendController', [
 				});
 			};
 
-			self.fetchAllUsers();
+			$scope.fetchAllUsers();
 
 			$scope.sendFriendRequest = function(id) {
 				friendService.sendRequest(id).then(function(d) {
@@ -87,16 +88,13 @@ app.controller('friendController', [
 					$scope.friends = {
 						text : d
 					};
+					$scope.requestedFriends = [];
 					// $rootScope.requestedFriends = d;
 					angular.forEach(d, function(value, key) {
 						// console.log('key:', key);
 						// console.log('value:', value);
-						$rootScope.requestedFriends.push(value);
+						$scope.requestedFriends.push(value);
 					});
-					// alert($rootScope.requestedFriends)
-					// $rootScope.requestFriends = d;
-
-					// $location.path="/viewFriendRequest";
 
 				}, function(errResponse) {
 					console.error('Error while updating Friend.');
@@ -107,11 +105,12 @@ app.controller('friendController', [
 				$scope.getMyFriendRequests()
 			}
 			$scope.show = function(val) {
-				var items = $rootScope.requestedFriends;
+				var items = $scope.requestedFriends;
 				// console.log(items)
+				// console.log(val)
 				// console.log('azx '+$filter('filter')(items, val).length)
 				var t = items.indexOf(val);
-				//console.log('id ' + val + ' and t is ' + t)
+				// console.log('id ' + val + ' and t is ' + t)
 				if (items.indexOf(val) != -1) {
 					return 'cc';
 
@@ -131,11 +130,11 @@ app.controller('friendController', [
 				friendService.getMyFriends().then(function(d) {
 					if (d.errorCode != '404') {
 
-						$rootScope.myfriends = d;
+						$scope.myfriends = d;
 						// console.log("Got the friends list" +
 						// $rootScope.myfriends)
 					} else {
-						$rootScope.myfriends = [ 'unknown' ];
+						$scope.myfriends = [ 'unknown' ];
 					}
 					// $location.path('/view_friend');
 				}, function(errResponse) {
@@ -149,12 +148,12 @@ app.controller('friendController', [
 			}
 
 			$scope.showFriends = function(val) {
-				var items = $rootScope.myfriends;
+				var items = $scope.myfriends;
 				// console.log(items)
 				// console.log('azx '+$filter('filter')(items, val).length)
 
 				var tt = items.indexOf(val);
-				//console.log('id ' + val + ' and t is ' + tt)
+				// console.log('id ' + val + ' and t is ' + tt)
 				if (items.indexOf(val) != -1) {
 					return 'aa'
 
@@ -163,4 +162,43 @@ app.controller('friendController', [
 				}
 				// $location.path("/job")
 			}
+
+			$scope.acceptFriendRequest = function(id) {
+				console.log("Getting my friends")
+				friendService.acceptFriendRequests(id).then(function(d) {
+					console.log(d.friend_id)
+					console.log("success response")
+					$scope.getMyFriendRequests();
+					$scope.show(d.user_id)
+					$scope.getMyFriends()
+					$scope.showFriends(d.user_id)
+					$location.path("/users")
+
+					// $location.path("/job")
+					// $location.path('/view_friend');
+				}, function(errResponse) {
+					console.error('Error while fetching Friends');
+				});
+			};
+
+			$scope.acceptRequest = function(id) {
+				$scope.acceptFriendRequest(id)
+			}
+			
+			$scope.unFriend = function(id){
+	              friendService.unFriend(id)
+	                      .then(function(d) {
+	                    	  $scope.getMyFriends()
+	      					$scope.showFriends(d.user_id)
+	      					}, 
+	                              function(errResponse){
+	                                   console.error('Error while unFriend ');
+	                              } 
+	                  );
+	          };
+	          
+	          $scope.unfriend = function(id) {
+	        	  console.log("calling")
+					$scope.unFriend(id)
+				}
 		} ]);

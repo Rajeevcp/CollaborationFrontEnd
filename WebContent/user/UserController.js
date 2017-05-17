@@ -193,6 +193,7 @@ app
 
 													} else { // valid
 																// credentials
+														$rootScope.currentUser = response;
 														$cookieStore.currentUser = response;
 														console
 																.log("Valid credentials. Navigating to home page")
