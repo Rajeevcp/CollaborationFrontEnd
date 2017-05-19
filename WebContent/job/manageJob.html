@@ -1,14 +1,14 @@
 <div ng-controller="jobController as ctrl">
 
-{{job.id}}
+
 <div ng-show="job.id" class="container">
 <h2 class="text-center">Edit Job Here</h2>
 <form class="form-horizontal" name="update_job" ng-submit="job_update()" >
  <div class="form-group">
-<label class="control-label col-sm-2">TITLE:</label><div class="col-sm-10"><input type="text"  id="title"  ng-model="job.title">
+<label class="control-label col-sm-2">TITLE:</label><div class="col-sm-10"><input required="true" type="text"  id="title"  ng-model="job.title">
 </div></div>
  <div class="form-group">
-<label class="control-label col-sm-2">QUALIFICATION</label><div class="col-sm-10"><input type="text" id="qualification" ng-model="job.qualification">
+<label class="control-label col-sm-2">QUALIFICATION</label><div class="col-sm-10"><input required="true" type="text" id="qualification" ng-model="job.qualification">
 </div></div>
  <div class="form-group">
 <label class="control-label col-sm-2">DATE:</label><div class="col-sm-10"><input type="date" format="yyyy/MM/dd" id="date_time" ng-model="job.date_time">

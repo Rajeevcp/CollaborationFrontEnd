@@ -201,4 +201,24 @@ app.controller('friendController', [
 	        	  console.log("calling")
 					$scope.unFriend(id)
 				}
+	          
+	          $scope.rejectFriendRequest = function(id){
+	              friendService.rejectFriendRequest(id)
+	                      .then(function(d) {
+	                    	$scope.getMyFriendRequests();
+	      					$scope.show(d.user_id)
+	      					$scope.getMyFriends()
+	      					$scope.showFriends(d.user_id)
+	                      },
+	                    		  $scope.fetchAllFriends, 
+	                              function(errResponse){
+	                                   console.error('Error while rejectFriendRequest');
+	                              } 
+	                  );
+	          };
+	          
+	          $scope.rejectfriendRequest = function(id){
+	        	  console.log("Rejection Started")
+	        	  $scope.rejectFriendRequest(id) 
+	          }
 		} ]);

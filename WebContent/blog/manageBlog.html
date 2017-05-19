@@ -29,7 +29,7 @@
    <td>{{blogDetails.reason}}</td>
    <td>{{blogDetails.description}}</td>
    <td style='white-space: nowrap'><a href="#edit-blog/{{blogDetails.id}}" ng-click="blogEdit(blogDetails.id)">EDIT</a>
-   <a ng-if="blogDetails.status== 'N'" href="#blog-manage" ng-click="blogAccept(blogDetails)">| Accept</a>
+   <a ng-if="blogDetails.status== 'N' || blogDetails.status== 'P'" href="#blog-manage" ng-click="blogAccept(blogDetails)">| Accept</a>
    <a ng-if="blogDetails.status== 'Y'" href="#blog-manage" ng-click="blogReject(blogDetails)">| Reject</a></td>
    	
    </tr>
@@ -43,11 +43,11 @@
 <h2 class="text-center">Edit Blog Here</h2>
 <form class="form-horizontal" name="update_blog" ng-submit="blog_update()" >
  <div class="form-group">
-<label class="control-label col-sm-2">ID:</label><div class="col-sm-10"><input type="text" name="id" id="id" value="{{currentBlog.id}}" ng-model="blog.id">
+<label class="control-label col-sm-2">ID:</label><div class="col-sm-10"><input required="true" type="text" name="id" id="id" value="{{currentBlog.id}}" ng-model="blog.id">
 </div></div>
  
  <div class="form-group">
-<label class="control-label col-sm-2">Title:</label><div class="col-sm-10"><input type="text" id="title" ng-model="blog.title">
+<label class="control-label col-sm-2">Title:</label><div class="col-sm-10"><input required="true" type="text" id="title" ng-model="blog.title">
 </div></div>
 <div ng-hide="currentUser.role !='admin'" class="form-group">
 <label class="control-label col-sm-2">Reason</label><div class="col-sm-10"><input type="text" id="user_id" ng-model="blog.reason">

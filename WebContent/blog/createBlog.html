@@ -4,11 +4,11 @@
 <h2 class="text-center">Create Blog Here....</h2>
 <form class="form-horizontal" name="form" ng-submit="createblog()" role="form">
  <div class="form-group">
-<label class="control-label col-sm-2">ID:</label><div class="col-sm-10"> <input type="text" id="id" ng-model="blog.id"></div>
+<label class="control-label col-sm-2">ID:</label><div class="col-sm-10"> <input required="true" type="text" id="id" ng-model="blog.id"></div>
 </div>
 
  <div class="form-group">
-<label class="control-label col-sm-2">Title:</label><div class="col-sm-10"> <input type="text" id="title" ng-model="blog.title"></div>
+<label class="control-label col-sm-2">Title:</label><div class="col-sm-10"> <input required="true" type="text" id="title" ng-model="blog.title"></div>
 </div>
  <div class="form-group">
 <label class="control-label col-sm-2">Description:</label><div class="col-sm-10"> <textarea cols="60" rows="10" id="description" ng-model="blog.description"></textarea>

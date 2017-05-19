@@ -1,5 +1,10 @@
 <head>
+
 <style>
+#loading-bar .bar {
+    background: #33ba3a;
+   
+  }
 
 .glyphicon-refresh-animate {
     -animation: spin .7s infinite linear;
@@ -16,13 +21,7 @@
     to { transform: scale(1) rotate(360deg);}
 }
 
-#load{
-    width:100%;
-    height:100%;
-    position:fixed;
-    z-index:9999;
-    background:url("https://www.creditmutuel.fr/cmne/fr/banques/webservices/nswr/images/loading.gif") no-repeat center center 
-}
+
 </style>
 <script>
 document.onreadystatechange = function () {
@@ -43,8 +42,8 @@ document.onreadystatechange = function () {
 	ng-init="fetchAllUsers(); getMyfriendsreq();showFriend()">
 	<div class="top">
 	
-		{{currentUser.name}}
-			<h2 class="text-center">Friend's List</h2>
+		
+			<h2 ng-show="myfriends.length != 0" class="text-center">Friend's List</h2>
 		
 	</div>
 	<div class="row">
@@ -79,7 +78,8 @@ document.onreadystatechange = function () {
 
 		</div>
 	</div>
-	<h2 ng-show="requestedFriends != 0" class="text-center">Confirm Request</h2>
+	
+	<h2  class="text-center">Confirm Request</h2>
 	<div class="row">
 
 		<div class="shadow">
@@ -99,7 +99,7 @@ document.onreadystatechange = function () {
 				
                      <div ng-init="showme=false" ng-show="showme"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</div>
 					<a  ng-click="acceptRequest(userDetails.id);showme=true" href="#users">CONFIRM</a> 
-                    <a  ng-click="sendRequest(userDetails.id)" href="#users"> | REJECCT</a>
+                    <a  ng-click="rejectfriendRequest(userDetails.id)" href="#users"> | REJECCT</a>
 				</div>
 				<div class="clearfix"></div>
 				<hr />

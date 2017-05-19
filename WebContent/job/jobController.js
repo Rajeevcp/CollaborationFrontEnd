@@ -60,7 +60,7 @@ app.controller('jobController', [
 
 					$scope.job = {};
 					$scope.suMessage = 'True';
-					$location.path("/create-job")
+					$location.path("/job")
 				}, function(errResponse) {
 					console.error('Error while creating Blog.');
 				});

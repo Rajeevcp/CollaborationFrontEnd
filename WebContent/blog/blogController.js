@@ -51,7 +51,7 @@ app.controller('blogController', [
 				blogService.createBlog(blog).then(function(d) {
 
 					alert("Blog Added Successfully")
-					$location.path("/home")
+					$location.path("/myBlog")
 				}, function(errResponse) {
 					console.error('Error while creating Blog.');
 				});

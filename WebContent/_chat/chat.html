@@ -1,27 +1,66 @@
-<html>
 <head>
-<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css" />
-    <link href="_css/style.css" rel="stylesheet" type="text/css" />  
-  </head>
-  <body >
-  
-  <h2><strong>Welcome to our one-and-only group chat!</strong></h2>
-  <p>Wanna chat with new people and engage in a small-talk or a sober conversation,... Then let us all chat here for a while to get along!</p>
-  <p>Just type in the text, and hit send!</p>
-  <div class="w3-animate-opacity">
-      <form ng-submit="addMessage()" name="messageForm">
-        <input type="text" placeholder="Compose a new message..." ng-model="message" />
-        <div class="info">
-          <span class="count" ng-bind="max - message.length" ng-class="{danger: message.length > max}">140</span>
-          <button ng-disabled="message.length > max || message.length === 0">Send</button>
-        </div>
-      </form>
-      <hr />
-      <p ng-repeat="message in messages | orderBy:'time':true" class="message">
-        <time>{{message.time | date:'HH:mm'}}</time>
-        <span ng-class="{self: message.self}">{{message.message}}</span>
-      </p>
 
-   </div>
-</body>
-</html>
+</head>
+<div class="container text-center">
+	<div class="row">
+		<h2>Open in chat (popup-box chat-popup)</h2>
+        <h4>Click Here</h4>
+        <div class="round hollow text-center">
+        <a ng-click="showme='popup-box-on'" href="#chat" id="addClass"><span class="glyphicon glyphicon-comment"></span> Open in chat </a>
+        </div>
+        
+        <hr>
+        
+        MORE :
+        <a target="_blank" href="http://bootsnipp.com/snippets/33ejn">Whatsapp Chat Box POPUP</a>,
+         <a target="_blank" href="http://bootsnipp.com/snippets/z4P39"> Creative User Profile  </a>
+         
+	</div>
+</div>
+
+
+<div class="popup-box chat-popup {{showme}}" id="qnimate">
+    		  <div class="popup-head">
+				<div class="popup-head-left pull-left">Group Chat</div>
+					  <div class="popup-head-right pull-right">
+
+						
+						<button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button"><i class="glyphicon glyphicon-off"></i></button>
+                      </div>
+			  </div>
+			<div class="popup-messages">
+    		
+			
+			<div ng-repeat="message in messages" id="message" class="message" class="direct-chat-messages" style="overflow:auto">
+                    	
+					<!-- Message. Default to the left -->
+                    <div class="direct-chat-msg doted-border" id="xx">
+                     
+                  
+                      <div class="direct-chat-text">
+                        {{message.message}}
+                      </div>
+					  <div class="direct-chat-info clearfix">
+                        <span class="direct-chat-timestamp pull-right">{{message.time | date:'HH:mm'}}</span>
+                      </div>
+					
+                      <!-- /.direct-chat-text -->
+                    </div>
+                    <!-- /.direct-chat-msg -->
+					
+
+                  </div>
+
+			
+			</div>
+			<div class="popup-messages-footer">
+			 <form ng-submit="addMessage()" name="messageForm">
+        
+          
+          
+			<textarea id="status_message" placeholder="Type a message..." rows="2" cols="34" name="message" ng-model="message"></textarea>
+			<button ng-click="myFunction()" ng-disabled="message.length > max || message.length === 0" >Send</button>
+			</form>
+		
+			</div>
+	  </div>

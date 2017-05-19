@@ -11,8 +11,9 @@ app
 						'$cookieStore',
 						'$window',
 						'$http',
+						'cfpLoadingBar',
 						function($scope, UserService, $location, $rootScope,
-								$cookieStore,$window, $http) {
+								$cookieStore,$window, $http,cfpLoadingBar) {
 							console.log("UserController...")
 						//	var this = this;
 							$scope.user = {
@@ -65,7 +66,10 @@ app
 												function(errResponse) {
 													console
 															.error('Error while fetching Users');
-												});
+												}).finally(function() {
+											        cfpLoadingBar.complete();
+											      });
+								
 								
 								
 							};

@@ -1,16 +1,24 @@
-var app = angular.module("myApp", [ 'ngRoute', 'ngCookies' ])
+var app = angular.module("myApp", [ 'ngRoute', 'ngCookies' ,'angular-loading-bar'])
 app.config(function($routeProvider) {
 	console.log('entering configuration')
-	$routeProvider.when('/', {
-		templateUrl : 'user/home.html'
+	$routeProvider.when('#', {
+		controller : 'blogController',
+		templateUrl : 'user/homes.html'
 
 	}).when('/login', {
 		controller : 'UserController',
 		templateUrl : 'user/login.html'
-	}).when('/home', {
+	})
+	.when('/home', {
 		// controller:'UserController',
 		templateUrl : 'user/home.html'
-	}).when('/register', {
+	})
+	.when('/', {
+		 controller:'blogController',
+		templateUrl : 'user/homes.html'
+	})
+	
+	.when('/register', {
 		// controller:'UserController',
 		templateUrl : 'user/register.html'
 	}).when('/blog', {
@@ -65,6 +73,10 @@ app.config(function($routeProvider) {
 	{
 		controller:'ChatCtrl',
 		templateUrl:'_chat/chat.html'
+	})
+	.when('/test',
+	{
+		templateUrl:'user/sidebar.html'
 	})
 
 })

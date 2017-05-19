@@ -92,6 +92,19 @@ app
 								                    }
 								            );
 								},
+							    rejectFriendRequest: function(friendID){
+							    	console.log("Starting of the method rejectFriendRequest")
+							        return $http.put(BASE_URL+'/rejectFriend/'+friendID)
+							                .then(
+							                        function(response){
+							                            return response.data;
+							                        }, 
+							                        function(errResponse){
+							                            console.error('Error while rejectFriendRequest');
+							                            return $q.reject(errResponse);
+							                        }
+							                );
+							},
 
 							};
 
