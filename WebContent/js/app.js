@@ -1,4 +1,24 @@
-var app = angular.module("myApp", [ 'ngRoute', 'ngCookies' ,'angular-loading-bar'])
+var app = angular.module("myApp", [ 'ngRoute', 'ngCookies',
+		'angular-loading-bar' ])
+ app.directive('fileModel', ['$parse', function ($parse) {
+            return {
+               restrict: 'A',
+               link: function(scope, element, attrs) {
+                  var model = $parse(attrs.fileModel);
+                  var modelSetter = model.assign;
+                  
+                  element.bind('change', function(){
+                     scope.$apply(function(){
+                        modelSetter(scope, element[0].files[0]);
+                     });
+                  });
+               }
+            };
+         }]);
+
+
+
+
 app.config(function($routeProvider) {
 	console.log('entering configuration')
 	$routeProvider.when('#', {
@@ -8,16 +28,14 @@ app.config(function($routeProvider) {
 	}).when('/login', {
 		controller : 'UserController',
 		templateUrl : 'user/login.html'
-	})
-	.when('/home', {
+	}).when('/home', {
 		// controller:'UserController',
 		templateUrl : 'user/home.html'
-	})
-	.when('/', {
-		 controller:'blogController',
+	}).when('/', {
+		controller : 'blogController',
 		templateUrl : 'user/homes.html'
 	})
-	
+
 	.when('/register', {
 		// controller:'UserController',
 		templateUrl : 'user/register.html'
@@ -27,6 +45,9 @@ app.config(function($routeProvider) {
 	}).when('/users', {
 		controller : 'friendController',
 		templateUrl : 'friend/people.html'
+	}).when('/friends', {
+		controller : 'friendController',
+		templateUrl : 'friend/friends.html'
 	})
 
 	.when('/blog-create', {
@@ -38,45 +59,55 @@ app.config(function($routeProvider) {
 	}).when('/edit-blog/:param1', {
 		templateUrl : 'blog/manageBlog.html',
 		controller : 'blogController'
+	}).when('/search_friend', {
+		templateUrl : 'user/search_friend.html',
+		controller : 'UserController'
 	})
 
 	.when('/blog/:param2', {
 		templateUrl : 'blog/singleBlog.html',
 		controller : 'blogController'
-	})
-	.when('/create_job', {
+	}).when('/create_job', {
 		templateUrl : 'job/create-job.html',
 		controller : 'jobController'
-	})
-	.when('/job-manage', {
+	}).when('/job-manage', {
 		templateUrl : 'job/manageJob.html',
 		controller : 'jobController'
-	})
-	.when('/job', {
+	}).when('/job', {
 		templateUrl : 'job/listJob.html',
 		controller : 'jobController'
 	})
-	.when('/profile', {
-		templateUrl : 'user/my_profile.html',
-		controller : 'UserController'
+	.when('/my_profiles', {
+		templateUrl : 'event/profile.html',
+		controller : 'eventController'
 	})
 	.when('/myBlog', {
 		templateUrl : 'blog/my_blog.html',
 		controller : 'blogController'
 	})
-	
+
 	.when('/friend/:param1', {
 		templateUrl : 'friend/send_request.html',
 		controller : 'UserController'
+	}).when('/chat', {
+		controller : 'ChatCtrl',
+		templateUrl : '_chat/chat.html'
+	}).when('/test', {
+		templateUrl : 'user/sidebar.html'
 	})
-	.when('/chat',
-	{
-		controller:'ChatCtrl',
-		templateUrl:'_chat/chat.html'
+	.when('/event_create', {
+		controller : 'eventController',
+		templateUrl : 'event/event_create.html'
 	})
-	.when('/test',
-	{
-		templateUrl:'user/sidebar.html'
+	
+		.when('/upload', {
+		controller : 'eventController',
+		templateUrl : 'event/uploadPicture.html'
+	})
+	
+		.when('/event', {
+		controller : 'eventController',
+		templateUrl : 'event/event_list.html'
 	})
 
 })
@@ -118,12 +149,8 @@ app.config(function($routeProvider) {
  * console.log("Checking:"+isAdminPage) if(isAdminPage === 0 && role!='admin' ) {
  * 
  * alert("You can not do this operation as you are logged as : " + role )
- * $location.path('/');
- *  }
- * 
- *  }
- *  } );
- * 
+ * $location.path('/'); }
+ *  } } );
  *  // keep user logged in after page refresh $rootScope.currentUser =
  * $cookieStore.get('currentUser') || {}; if ($rootScope.currentUser) {
  * $http.defaults.headers.common['Authorization'] = 'Basic' +
@@ -135,7 +162,7 @@ app.run(function($cookieStore, $rootScope, $location, UserService, $http) {
 	$rootScope.logout = function() {
 		console.log('logout()')
 		$rootScope.currentUser = {};
-		//delete $rootScope.currentUser;
+		// delete $rootScope.currentUser;
 		$cookieStore.remove('currentUser')
 		UserService.logout().then(function(response) {
 			console.log("Logged out successfully..");
@@ -164,7 +191,7 @@ app.run(function($cookieStore, $rootScope, $location, UserService, $http) {
 		var isAdminPage = $.inArray(currentPage, adminPages)
 
 		var isLoggedIn = $rootScope.currentUser.id;
-
+        console.log("------"+$rootScope.currentUser.id)
 		console.log("isLoggedIn:" + isLoggedIn)
 		console.log("isUserPage:" + isUserPage)
 		console.log("isAdminPage:" + isAdminPage)

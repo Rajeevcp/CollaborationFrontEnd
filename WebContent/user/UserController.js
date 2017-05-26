@@ -27,11 +27,11 @@ app
 								role : '',
 								errorCode : '',
 								errorMessage : '',
-								imageUrl : ''
+								image : ''
 							};
 							
 
-							this.currentUser = {
+							$rootScope.currentUser = {
 								id : '',
 								name : '',
 								password : '',
@@ -42,7 +42,7 @@ app
 								role : '',
 								errorCode : '',
 								errorMessage : '',
-								imageUrl : ''
+								image : ''
 							};
 							
 							$scope.users = []; // json array
@@ -111,15 +111,28 @@ app
 												});
 							};
 
-							this.myProfile = function() {
+							$scope.myProfile = function() {
 								console.log("myProfile...")
 								UserService
 										.myProfile()
 										.then(
 												function(d) {
-													this.user = d;
+													$scope.user = d;
+												
+													
+													
+													$rootScope.currentUser = $scope.user
+													$cookieStore.put(
+															'currentUser',
+															$scope.user);
+
+													$http.defaults.headers.common['Authorization'] = 'Basic '
+															+ $rootScope.currentUser;
+													
+													
+													
 													$location
-															.path("/myProfile")
+															.path("/my_profiles")
 												},
 												function(errResponse) {
 													console
@@ -127,6 +140,7 @@ app
 												});
 							};
 
+							
 							this.accept = function(id) {
 								console.log("accept...")
 								UserService
@@ -197,8 +211,12 @@ app
 
 													} else { // valid
 																// credentials
+														
+														
 														$rootScope.currentUser = response;
+														$rootScope.currentUser.image = '';
 														$cookieStore.currentUser = response;
+														$cookieStore.currentUser.image = '';
 														console
 																.log("Valid credentials. Navigating to home page")
                                                                 $scope.fetchAllUsers();
@@ -219,8 +237,7 @@ app
 
 														$http.defaults.headers.common['Authorization'] = 'Basic '
 																+ $rootScope.currentUser;
-														$location
-																.path('/users');
+														$location.path("/users")
 
 													}
 
@@ -279,5 +296,35 @@ app
 								};
 								$scope.myForm.$setPristine(); // reset Form
 							};
+							
+							$scope.uploadFile = function(files) {
+								var BASE_URL='http://localhost:8083/CollaborationRestService'
+							    var image = new FormData();
+							    //Take the first selected file
+							    image.append("file", files[0]);
+
+							    $http.post(BASE_URL+'/imageUpload', image, {
+							        withCredentials: true,
+							        headers: {'Content-Type': undefined },
+							        transformRequest: angular.identity
+							    }).success(function(data, status, headers, config) {
+									alert("success")
+									 $scope.reloadPage = function()                                                
+						                   {
+						                     $window.location.reload();
+						                   }
+									console.log(image)
+								}).error(function(data, status, headers, config) {
+									alert("error")
+								});
+
+							};
+							
+							   $(function() {
+								   console.log("edit")
+								    $('#profile-image1').on('click', function() {
+								        $('#profile-image-upload').click();
+								    });
+								});    
 
 						} ]);

@@ -92,7 +92,7 @@ app.controller('friendController', [
 					// $rootScope.requestedFriends = d;
 					angular.forEach(d, function(value, key) {
 						// console.log('key:', key);
-						// console.log('value:', value);
+						 console.log('value:', value);
 						$scope.requestedFriends.push(value);
 					});
 

@@ -1,3 +1,27 @@
+
+
+<head>
+<style>
+body {
+  
+    color:#ffffff !important;
+    background: url(images/img-9.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.col-sm-10 {
+color:#333 !important;
+}
+.control-label {
+ color:#ffffff !important;
+}
+  a:link {
+    color: #ffffff;
+}
+</style>
+</head>
 <div ng-controller="blogController as ctrl">
 <div ng-init="getAllBlog()">
 
@@ -5,7 +29,7 @@
 {{blog=currentBlog;""}}
 
 <div class="container">
-<table class="table table-hover table-condensed table-bordered"  ng-hide="$routeParams.param1">
+<table class="table  table-condensed table-bordered"  ng-hide="$routeParams.param1">
 <thead>
 <tr>
 <th>ID</th>
@@ -29,8 +53,8 @@
    <td>{{blogDetails.reason}}</td>
    <td>{{blogDetails.description}}</td>
    <td style='white-space: nowrap'><a href="#edit-blog/{{blogDetails.id}}" ng-click="blogEdit(blogDetails.id)">EDIT</a>
-   <a ng-if="blogDetails.status== 'N' || blogDetails.status== 'P'" href="#blog-manage" ng-click="blogAccept(blogDetails)">| Accept</a>
-   <a ng-if="blogDetails.status== 'Y'" href="#blog-manage" ng-click="blogReject(blogDetails)">| Reject</a></td>
+   <a style="color:#ffffff" ng-if="blogDetails.status== 'N' || blogDetails.status== 'P'" href="#blog-manage" ng-click="blogAccept(blogDetails)">| Accept</a>
+   <a style="color:#ffffff" ng-if="blogDetails.status== 'Y'" href="#blog-manage" ng-click="blogReject(blogDetails)">| Reject</a></td>
    	
    </tr>
 	

@@ -1,10 +1,29 @@
+<head>
+<style type="text/css">
+.show_text {
+color:#ffffff;
+}
+.blog_search {
+color:#333;
+}
+body {
+    
+    background: url(images/img-9.jpg) no-repeat center center fixed ; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+</style>
+</head>
 <div ng-controller="blogController as ctrl">
 <div ng-init="getAllBlog()">
 
 <div class="container">
   <h2 class="text-center">Blog</h2>
-  <div ng-repeat="blogDetails in blogs">
-  <div ng-hide="blogDetails.status =='N'">
+  <p class="show_text">Search Blog: <input class="blog_search" type="text" ng-model="sear_text"></p>
+  <div ng-repeat="blogDetails in blogs | filter: sear_text">
+  <div ng-hide="blogDetails.status =='N' || blogDetails.status =='P'">
   <div class="panel panel-default">
     <div class="panel-heading"><h3>{{blogDetails.title}}</h3></div>
     

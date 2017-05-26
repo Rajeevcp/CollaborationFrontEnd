@@ -1,3 +1,23 @@
+
+<head>
+<style>
+body {
+   color:#ffffff !important;
+    
+    background: url(images/img-9.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+  a:link {
+    color: #ffffff;
+}
+.job_search {
+color:#333;
+}
+</style>
+</head>
 <div ng-controller="blogController as ctrl">
 <div ng-hide="job.id" ng-init="getUserAppJob(currentUser.id); getAllJob() ">
 
@@ -7,7 +27,8 @@
 
 <div class="container">
 <h2 class="text-center">Apply Jobs Now !!!</h2>
-<table class="table table-hover table-condensed table-bordered">
+<p>Quick Search: <input class="job_search" type="text" ng-model="sear_text"></p>
+<table class="table  table-condensed table-bordered">
 <thead>
 <tr>
 <th>ID</th>
@@ -20,7 +41,7 @@
 </tr>
 </thead>
 	
-   <tr ng-repeat="jobDetails in jobs">
+   <tr ng-repeat="jobDetails in jobs | filter: sear_text">
    <div>
    <td>{{jobDetails.id}}</td>
    <td>{{jobDetails.title}}</td>

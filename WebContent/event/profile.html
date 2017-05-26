@@ -1,0 +1,73 @@
+
+<head>
+<meta charset="ISO-8859-1">
+<title>User Profile Page</title>
+<style>
+            input.hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+.bg-primary {
+    
+    background-color: rgba(51, 86, 183, 0.72) !important;
+}
+
+
+#profile-image1 {
+    cursor: pointer;
+  
+     width: 250px;
+    height: 250px;
+	border:2px solid #03b1ce ;}
+	.tital{ font-size:16px; font-weight:500;}
+	 .bot-border{ border-bottom:1px #f8f8f8 solid;  margin:5px 0  5px 0}	
+</style>
+</head>
+<div class="col=md-12">
+<h1 class="text-center bg-primary">My Profile</h1>
+
+<div class="col-md-6">
+<div class="col-md-2">
+<h4 class="text-center bg-primary">ID</h4>
+<h2> {{user.id}}</h2>  
+</div>
+<div class="col-md-2">
+<h4 class="text-center bg-primary">NAME</h4> 
+<h2> {{user.name}}</h2> 
+</div>
+<div class="col-md-4">
+<h4 class="text-center bg-primary">ADDRESS</h4> 
+<h2> {{user.address}}</h2> 
+</div>
+<div class="col-md-2">
+<h4 class="text-center bg-primary">PHONE</h4> 
+<p> {{user.moile}}</p> 
+</div>
+<div class="col-md-2">
+<h4 class="text-center bg-primary">EMAIL</h4>
+<h2 class="text-justify"> {{user.email}}</h2> 
+</div>
+<div class="col-md-2">
+ 
+
+</div>
+
+ 
+</div>
+  <div ng-init="myProfile()" class="col-md-6">
+
+      <div  align="center"> <img alt="User Pic" 
+      data-ng-src="data:image/JPEG;base64,{{user.image}}"  id="profile-image1" class="img-circle img-responsive"> 
+                
+    <input id="profile-image-upload"  class="hidden"  
+    onchange="angular.element(this).scope().uploadFile(this.files)" type="file">
+<div style="color:#999;" >click here to change your profile image</div>
+                <!--Upload Image Js And Css-->       
+                     </div>
+              
+              <br>
+    
+              <!-- /input-group -->
+            </div>
+</div>
