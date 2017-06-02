@@ -8,9 +8,11 @@ app.controller('friendController', [
 		'$rootScope',
 		'$http',
 		'$routeParams',
+		'$interval',
 		'$filter',
+		'$timeout',
 		function(UserService, $scope, friendService, $location, $rootScope,
-				$http, $routeParams, $filter) {
+				$http, $routeParams,$interval, $filter,$timeout) {
 			console.log("FriendController...")
 
 			var self = this;
@@ -45,9 +47,18 @@ app.controller('friendController', [
 				errorMessage : '',
 				errorCode : ''
 			};
+	$scope.message = {};
+	$scope.sendMessage = {
+			
+			user_id : '',
+			friend_id : '',
+			date_time : '',
+			message : ''
+			
+	}
 			$scope.myfriends = [];
 			$scope.users = [];
-
+			 var param1 = $routeParams.param1;
 			$scope.requestedFriends = [];
 
 			$scope.fetchAllUsers = function() {
@@ -221,4 +232,76 @@ app.controller('friendController', [
 	        	  console.log("Rejection Started")
 	        	  $scope.rejectFriendRequest(id) 
 	          }
+	          
+	          $scope.loadMessage = function(id) {
+	        	  console.log("Start friend id chat "+id)
+					friendService.getFriendMessage(id).then(function(d) {
+						$scope.message = d;
+						
+						console.log(JSON.stringify($scope.message))
+					}, function(errResponse) {
+
+					});
+
+				};
+	          
+	          $scope.load_message = function(){
+	        	  
+	        	  $scope.loadMessage(param1)
+	          }
+	          
+	          
+	          $scope.sendingmsg = function($data) {
+	        	  console.log("sending msgs to "+$data.friend_id)
+	        	  
+	        		friendService.sendMessage($data).then(function(d) {
+	        			console.log(JSON.stringify(d))
+	        			$scope.intervalFunction();
+						//alert("Success")
+	        			$scope.sendMessage = {};
+						//console.log(JSON.stringify($scope.message))
+					}, function(errResponse) {
+
+					});
+					
+
+				};
+	          
+	          $scope.addChat = function() {
+	        	  console.log("Message Sending started")
+	        	  console.log("Sending to "+param1)
+	        	  $scope.sendMessage.friend_id = param1;
+	        	  $scope.sendMessage.message = $scope.newChatMsg;
+	        	  console.log("msg is "+$scope.sendMessage.newChatMsg)
+	        	  $scope.sendingmsg($scope.sendMessage)
+	        	  
+	        	  
+	          }
+	        
+	         
+	          
+	          
+	          $scope.intervalFunction = function(){
+	        	    $timeout(function() {
+	        	    	$scope.loadMessage(param1)
+	        	     
+	        	    }, 1000)
+	        	  };
+
+	        	  // Kick off the interval
+	        	  
+
+	        	
+	        /*  $interval(callAtInterval, 1000);
+	          
+	          function callAtInterval() {
+	        	  if(param1){
+	        		  if($rootScope.currentUser.id == 'rajeev') {
+	        		 // $scope.loadMessage($rootScope.currentUser.id)
+	        		  console.log($scope.sendMessage.friend_id);
+	        	    console.log($rootScope.currentUser.id);
+	        		  }
+	        	  }
+	          }*/
+	            
 		} ]);

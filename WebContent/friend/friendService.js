@@ -105,6 +105,36 @@ app
 							                        }
 							                );
 							},
+							
+							getFriendMessage: function(friendID){
+							    	console.log("Starting of the service of friend message")
+							        return $http.get(BASE_URL+'/chat/'+friendID)
+							                .then(
+							                        function(response){
+							                            return response.data;
+							                        }, 
+							                        function(errResponse){
+							                            console.error('Error while rejectFriendRequest');
+							                            return $q.reject(errResponse);
+							                        }
+							                );
+							},
+							
+							sendMessage: function(chat){
+						    	console.log("Starting sending message services")
+						    	console.log("service friend_id "+chat.friend_id)
+						    	console.log("service message "+chat.message)
+						        return $http.post(BASE_URL+'/chating/save',chat)
+						                .then(
+						                        function(response){
+						                            return response.data;
+						                        }, 
+						                        function(errResponse){
+						                            console.error('Error while rejectFriendRequest');
+						                            return $q.reject(errResponse);
+						                        }
+						                );
+						},
 
 							};
 

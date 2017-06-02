@@ -109,6 +109,11 @@ app.config(function($routeProvider) {
 		controller : 'eventController',
 		templateUrl : 'event/event_list.html'
 	})
+	
+		.when('/chatbox/:param1', {
+		controller : 'friendController',
+		templateUrl : 'friend/chatFriend.html'
+	})
 
 })
 

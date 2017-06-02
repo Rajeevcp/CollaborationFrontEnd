@@ -100,6 +100,8 @@ document.onreadystatechange = function () {
 					</a>
 <div ng-show="showthis"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</div>
 	<a ng-click="unfriend(userDetails.id); showthis=true" href="#users" >Unfriend <span class="glyphicon glyphicon-trash"></span></a>
+	
+	<a href="#chatbox/{{userDetails.id}}">Chat with Friend  <i class="fa fa-whatsapp" aria-hidden="true"></i></a>
 				</div>
 				<div class="clearfix"></div>
 				<hr />
