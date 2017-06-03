@@ -100,10 +100,17 @@ app
 										.createUser(user)
 										.then(
 												function(d) {
+													
+													if($rootScope.errorCode == '200') {
 													$rootScope.status = "true";
-													alert($rootScope.status)
+													//alert($rootScope.status)
 													alert("Thank you for registration")
 													$location.path("/home")
+													}
+													else {
+														
+														alert('Choose another ID')
+													}
 												},
 												function(errResponse) {
 													console

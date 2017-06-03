@@ -99,6 +99,10 @@ app.config(function($routeProvider) {
 		controller : 'eventController',
 		templateUrl : 'event/event_create.html'
 	})
+	.when('/event-manage', {
+		controller : 'eventController',
+		templateUrl : 'event/manage_event.html'
+	})
 	
 		.when('/upload', {
 		controller : 'eventController',

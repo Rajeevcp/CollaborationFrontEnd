@@ -195,5 +195,40 @@ app.controller('eventController', [
 			});    
 
 		   
+		   $scope.getEventById = function(id) {
+
+				console.log("Get Event..." + id)
+				eventService.getEventByID(id).then(function(d) {
+					$scope.event = d;
+					$scope.event.event_date = new Date($scope.event.event_date);
+					alert($scope.event.event_date);
+
+				}, function(errResponse) {
+					console.error('Error while fetching Event');
+				});
+
+			};
+
+			$scope.eventEdit = function(id) {
+				console.log('Get  Event By Id ' + id);
+				$scope.getEventById(id);
+			}
+			
+			$scope.updateEvent = function(){
+				eventService.updateEvent($scope.event).then(function(d) {
+					$scope.event = {};
+					$scope.getAllEvents()
+					$location.path("/event-manage")
+				},
+				function(errResponse){
+					console.error('Error while updating Event')
+					
+				});
+				
+			};
+			$scope.event_update = function(){
+				console.log('Updating Event started '+$scope.event.id)
+				$scope.updateEvent($scope.event)
+			}
 			
 		} ]);

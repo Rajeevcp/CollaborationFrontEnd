@@ -51,6 +51,25 @@ app.service('eventService', [
 							}, null);
 				},	
 				
+				getEventByID : function(id) {
+					console.log("calling get Event " + id)
+					return $http.get(BASE_URL + '/event/' + id).then(
+							function(response) {
+								return response.data;
+							}, null);
+				},
+				
+				updateEvent : function(event) {
+					console.log('Calling Update Event services')
+					return $http.put(BASE_URL + '/event/update',event)
+					.then(function(response) {
+						return response.data;
+					}, function(errResponse) {
+						console.error('Error while update event');
+						return $q.reject(errResponse);
+					});
+				},
+				
 			}
 		} ]);
 
